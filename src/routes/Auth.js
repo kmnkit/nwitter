@@ -7,6 +7,7 @@ const Auth = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [newAccount, setNewAccount] = useState(true);
+    const [error, setError] = useState("");
 
     const onChange = (e) => {
         const {
@@ -33,12 +34,10 @@ const Auth = () => {
             }
             console.log(data);
         } catch (error) {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(errorCode);
-            console.log(errorMessage);
+            setError(error.errorMessage);
         }
-    }
+    };
+    const toggleAccount = () => setNewAccount(prev => !prev);
     return (
         <div>
             <form onSubmit={onSubmit}>
@@ -59,7 +58,9 @@ const Auth = () => {
                     onChange={onChange}
                 />
                 <input type="submit" value={newAccount ? "Create Account" : "Log In"} />
+                {error}
             </form>
+            <span onClick={toggleAccount}>{newAccount ? "Log In" : "Create Account"}</span>
             <div>
                 <button>Continue with Google</button>
                 <button>Continue with Github</button>
