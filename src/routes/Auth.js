@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import { authService } from 'fbase';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import {
+    createUserWithEmailAndPassword,
+    GoogleAuthProvider,
+    GithubAuthProvider,
+    signInWithEmailAndPassword,
+    signInWithPopup
+} from "firebase/auth";
 
 
 const Auth = () => {
@@ -22,22 +28,35 @@ const Auth = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
         try {
-            let data;
             if (newAccount) {
-                data = await createUserWithEmailAndPassword(
+                await createUserWithEmailAndPassword(
                     authService, email, password
                 );
             } else {
-                data = await signInWithEmailAndPassword(
+                await signInWithEmailAndPassword(
                     authService, email, password
                 );
             }
-            console.log(data);
         } catch (error) {
             setError(error.errorMessage);
         }
     };
     const toggleAccount = () => setNewAccount(prev => !prev);
+    let provider;
+    const onSocialClick = async (e) => {
+        const { target: { name } } = e;
+        try {
+            if (name === 'google') {
+                provider = new GoogleAuthProvider();
+            } else if (name === 'github') {
+                provider = new GithubAuthProvider();
+            };
+            const result = await signInWithPopup(authService, provider);
+            const credential = provider.credentialFromResult(result);
+        } catch (error) {
+            setError(error.message);
+        };
+    };
     return (
         <div>
             <form onSubmit={onSubmit}>
@@ -62,8 +81,8 @@ const Auth = () => {
             </form>
             <span onClick={toggleAccount}>{newAccount ? "Log In" : "Create Account"}</span>
             <div>
-                <button>Continue with Google</button>
-                <button>Continue with Github</button>
+                <button onClick={onSocialClick} name="google">Continue with Google</button>
+                <button onClick={onSocialClick} name="github">Continue with Github</button>
             </div>
         </div>
     );
