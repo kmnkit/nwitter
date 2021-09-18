@@ -51,8 +51,8 @@ const Auth = () => {
             } else if (name === 'github') {
                 provider = new GithubAuthProvider();
             };
-            const result = await signInWithPopup(authService, provider);
-            const credential = provider.credentialFromResult(result);
+            await signInWithPopup(authService, provider);
+            // provider.credentialFromResult(result);
         } catch (error) {
             setError(error.message);
         };

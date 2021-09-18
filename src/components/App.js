@@ -22,7 +22,11 @@ function App() {
   return (
     <>
       {/* 유저 로그인이 확인 되면 isLoggedIn을 true로 하고 그 전까지는 문구만 출력 */}
-      {init ? <AppRouter isLoggedIn={isLoggedIn} userObj={userObj} /> : "Initializing..."}
+      {init ? (
+        <AppRouter isLoggedIn={Boolean(isLoggedIn)} userObj={userObj} />
+      ) : (
+        "Initializing..."
+      )};
       <footer>&copy; Nwitter-Marco {new Date().getFullYear()}</footer>
     </>
   );

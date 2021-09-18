@@ -40,11 +40,13 @@ const Home = ({ userObj }) => {
                 <input type="submit" value="Nweet" />
             </form>
             <div>
-                {
-                    nweets.map(nweet => (
-                        <Nweet key={nweet.id} nweetObj={nweet} isOwner={nweet.creatorId === userObj.uid} />
-                    ))
-                }
+                {nweets.map(nweet => (
+                    <Nweet
+                        key={nweet.id}
+                        nweetObj={nweet}
+                        isOwner={nweet.creatorId === userObj.uid}
+                    />
+                ))};
             </div>
         </>
     );
