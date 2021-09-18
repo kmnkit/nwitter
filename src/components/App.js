@@ -15,7 +15,7 @@ function App() {
       }
       setInit(true); // 유저 로그인 되면 set true
     });
-  }, []);
+  }, [])
   return (
     <>
       {/* 유저 로그인이 확인 되면 isLoggedIn을 true로 하고 그 전까지는 문구만 출력 */}
