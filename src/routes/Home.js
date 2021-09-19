@@ -39,6 +39,7 @@ const Home = ({ userObj }) => {
         setNweet("");
         setAttachment("");
     };
+
     const onChange = (e) => {
         const { target: { value } } = e;
         setNweet(value);
