@@ -85,7 +85,7 @@ const Auth = () => {
                 <button onClick={onSocialClick} name="github">Continue with Github</button>
             </div>
         </div>
-    );
+    )
 };
 
 export default Auth;

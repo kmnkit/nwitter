@@ -26,10 +26,9 @@ function App() {
         <AppRouter isLoggedIn={Boolean(isLoggedIn)} userObj={userObj} />
       ) : (
         "Initializing..."
-      )};
-      <footer>&copy; Nwitter-Marco {new Date().getFullYear()}</footer>
+      )}
     </>
-  );
+  )
 }
 
 export default App;
