@@ -1,11 +1,10 @@
 import AppRouter from "components/Router";
 import { authService } from "fbase";
 import { useEffect, useState } from "react";
-import { onAuthStateChanged, updateProfile } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 
 function App() {
   const [init, setInit] = useState(false); // 유저 로그인 로드를 기다리기 위한 flag
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // 유저 로그인 여부 flag
   const [userObj, setUserObj] = useState(null);
 
   useEffect(() => {
@@ -16,8 +15,7 @@ function App() {
           displayName: user.displayName
         });
       } else {
-        setIsLoggedIn(false); // 유저가 인증되지 않은 경우 flag를 false로 유지
-        setUserObj(null);
+        setUserObj(false);
       }
       setInit(true); // 유저 로그인 되면 set true
     });
