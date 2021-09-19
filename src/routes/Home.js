@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { dbService, storageService } from 'fbase';
 import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp } from "firebase/firestore";
-import { ref, uploadString } from '@firebase/storage';
+import { getDownloadURL, ref, uploadString } from '@firebase/storage';
 import Nweet from 'components/Nweet';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -22,16 +22,22 @@ const Home = ({ userObj }) => {
     }, []);
     const onSubmit = async (e) => {
         e.preventDefault();
-        /*await addDoc(collection(dbService, "nweets"), {
+        let attachmentUrl = "";
+        if (attachment !== "") {
+            // 스토리지와 레퍼런스 호출
+            const attachmentRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
+            const resp = await uploadString(attachmentRef, attachment, "data_url");
+            attachmentUrl = await getDownloadURL(resp.ref);
+        }
+        // Nweet 텍스트 부분 저장
+        await addDoc(collection(dbService, "nweets"), {
             text: nweet,
             createdAt: serverTimestamp(),
-            creatorId: userObj.uid
+            creatorId: userObj.uid,
+            attachmentUrl
         });
-        setNweet("");*/
-        // 스토리지와 레퍼런스 호출
-        const attachmentRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
-        const resp = await uploadString(attachmentRef, attachment, "data_url");
-        console.log(resp);
+        setNweet("");
+        setAttachment("");
     };
     const onChange = (e) => {
         const { target: { value } } = e;
