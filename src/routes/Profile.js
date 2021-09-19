@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import { updateProfile } from 'firebase/auth';
 
-const Profile = ({ userObj }) => {
+const Profile = ({ userObj, refreshUser }) => {
     const history = useHistory();
     const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
 
@@ -20,8 +20,10 @@ const Profile = ({ userObj }) => {
     const onSubmit = async (e) => {
         e.preventDefault();
         if (userObj.displayName !== newDisplayName) {
-            await updateProfile(userObj, { displayName: newDisplayName });
-        }
+            await updateProfile(authService.currentUser, { displayName: newDisplayName });
+            refreshUser();
+        };
+
     };
     return (
         <>
