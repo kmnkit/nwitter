@@ -64,11 +64,11 @@ const NweetFactory = ({ userObj }) => {
     const onClearAttachment = () => setAttachment("");
 
     return (
-        <form onSubmit={onSubmit}>
-            <input
+        <form onSubmit={onSubmit} className="nweetForm">
+            <textarea
                 value={nweet}
                 onChange={onChange}
-                type="text"
+                rows="5"
                 placeholder="What's on your mind?"
                 maxLength={120}
             />
@@ -77,16 +77,17 @@ const NweetFactory = ({ userObj }) => {
                 accept="image/*"
                 onChange={onFileChange}
             />
-            <input
-                type="submit"
-                value="Nweet"
-            />
             {attachment && (
-                <div>
-                    <img src={attachment} width="50px" height="50px" />
+                <div className="attachment">
+                    <img src={attachment} width="50px" height="50px" alt="" />
                     <button onClick={onClearAttachment}>Clear</button>
                 </div>
             )}
+            <input
+                className="Btn NweetBtn"
+                type="submit"
+                value="Nweet"
+            />
         </form>
     );
 };

@@ -34,9 +34,9 @@ const Profile = ({ userObj, refreshUser }) => {
                     placeholder="Display Name"
                     value={newDisplayName}
                 />
-                <input type="submit" value="Update Profile" />
+                <input type="submit" className="Btn updateProfileBtn" value="Update Profile" />
             </form>
-            <button onClick={onLogOutClick}>Log Out</button>
+            <button onClick={onLogOutClick} className="Btn logoutBtn">Log Out</button>
         </>
     )
 };

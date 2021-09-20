@@ -1,0 +1,68 @@
+@import './mixin';
+
+.Btn {
+    border: none;
+    border-radius: 40px;
+    color: white;
+    font-size: 20px;
+    width: 500px;
+    height: 50px;    
+    margin-bottom: 5px;
+    &.SignupBtn {
+        background-color: steelblue;
+    }
+    &.GoogleLogin {
+        background-color: crimson;
+    }
+    &.GithubLogin {
+        background-color: darkviolet;
+    }
+    &.NweetBtn {
+        background-color: dodgerblue;
+    }
+}
+
+.Transform {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+}
+
+.delBtn, .editBtn,
+.updateBtn, .cancelBtn,
+.updateProfileBtn,.logoutBtn{
+    color:white;
+    margin-right: 5px;
+    margin-top: 5px;
+    position: related;
+    bottom: 0;
+    width: 500px;
+    height: 25px;
+    border-radius: 10px;
+    box-shadow: 1px 1px black;
+}
+
+.editBtn,
+.updateBtn,
+.updateProfileBtn {
+    background-color: dodgerblue;
+}
+.delBtn, .cancelBtn, .logoutBtn{
+    background-color: crimson;
+    opacity: 0.8;
+}
+
+.cancelBtn{
+    margin-top: 10px;
+}
+
+@include mobile {
+    .Btn {
+        min-width: 100px;
+        width: auto;
+    }
+}

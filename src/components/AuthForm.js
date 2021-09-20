@@ -1,6 +1,10 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@firebase/auth';
-import { authService } from 'fbase';
+import { authService, dbService } from 'fbase';
 import { useState } from 'react';
+import { faTwitter } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { addDoc, collection, serverTimestamp } from '@firebase/firestore';
+import { updateProfile } from '@firebase/auth';
 
 const AuthForm = () => {
     const [email, setEmail] = useState("");
@@ -23,9 +27,10 @@ const AuthForm = () => {
         e.preventDefault();
         try {
             if (newAccount) {
-                await createUserWithEmailAndPassword(
+                const newUser = await createUserWithEmailAndPassword(
                     authService, email, password
                 );
+                await updateProfile(newUser, { displayName: "Anonymous" });
             } else {
                 await signInWithEmailAndPassword(
                     authService, email, password
@@ -40,10 +45,13 @@ const AuthForm = () => {
 
     return (
         <>
-            <form onSubmit={onSubmit}>
+            <div className="logoBox">
+                <FontAwesomeIcon className="logo" icon={faTwitter} />
+            </div>
+            <form onSubmit={onSubmit} className="LoginForm">
                 <input
                     name="email"
-                    type="text"
+                    type="email"
                     placeholder="Email"
                     required
                     value={email}
@@ -57,10 +65,14 @@ const AuthForm = () => {
                     value={password}
                     onChange={onChange}
                 />
-                <input type="submit" value={newAccount ? "Create Account" : "Log In"} />
+                <div className="BtnContainer">
+                    <input className="Btn SignupBtn" type="submit" value={newAccount ? "Create Account" : "Log In"} />
+                </div>
                 {error}
             </form>
-            <span onClick={toggleAccount}>{newAccount ? "Log In" : "Create Account"}</span>
+            <div className="Transform">
+                <span onClick={toggleAccount}>{newAccount ? "Click to Log In" : "Click to Create Account"}</span>
+            </div>
         </>
     );
 };

@@ -1,0 +1,45 @@
+@import "./_mixin";
+@import "./Button";
+@import "./Form";
+@import "./Nweet";
+
+.App{
+    height: 100vh;
+}
+
+.logoBox {
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    font-size: 50px;
+}
+
+.SocialLoginBox{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+@include mobile {
+    .img-card {
+        width: 100px;
+    }
+}
+
+@include tablet {
+    .img-card {
+        width: 200px;
+    }
+}
+
+@include desktop {
+    .img-card {
+        width: 300px;
+    }
+}
