@@ -24,7 +24,7 @@ const Auth = () => {
     return (
         <div>
             <AuthForm />
-            <div class="SocialLoginBox">
+            <div className="SocialLoginBox">
                 <button className="Btn GoogleLogin" onClick={onSocialClick} name="google">Continue with Google <FontAwesomeIcon icon={faGoogle} /></button>
                 <button className="Btn GithubLogin" onClick={onSocialClick} name="github">Continue with Github <FontAwesomeIcon icon={faGithub} /></button>
             </div>

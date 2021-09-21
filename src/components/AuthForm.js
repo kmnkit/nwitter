@@ -1,9 +1,8 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@firebase/auth';
-import { authService, dbService } from 'fbase';
+import { authService } from 'fbase';
 import { useState } from 'react';
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { addDoc, collection, serverTimestamp } from '@firebase/firestore';
 import { updateProfile } from '@firebase/auth';
 
 const AuthForm = () => {

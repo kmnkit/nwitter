@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { authService, dbService, storageService } from 'fbase';
-import { collection, doc, deleteDoc, updateDoc, where, query, getDocs } from 'firebase/firestore';
+import React, { useState } from 'react';
+import { dbService, storageService } from 'fbase';
+import { doc, deleteDoc, updateDoc } from 'firebase/firestore';
 import { ref, deleteObject } from 'firebase/storage';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChild } from '@fortawesome/free-solid-svg-icons'
@@ -47,8 +47,8 @@ const Nweet = ({ nweetObj, isOwner }) => {
                             required
                         />
                         <div>
-                            <input type="submit" value="Update Nweet" className="updateBtn" />
-                            <button onClick={toggleEditing} className="cancelBtn">Cancel</button>
+                            <input type="submit" value="Update Nweet" className="Btn updateBtn" />
+                            <button onClick={toggleEditing} className="Btn cancelBtn">Cancel</button>
                         </div>
                     </form>
                 </>
@@ -61,8 +61,8 @@ const Nweet = ({ nweetObj, isOwner }) => {
                     </div>
                     <div className="NweetContainer">
                         <span className="userInfo">{nweetObj.creatorId}</span>
-                        <div class="NweetContainer__inner">
-                            <p class="nweetText">
+                        <div className="NweetContainer__inner">
+                            <p className="nweetText">
                                 {nweetObj.text}
                             </p>
                             {nweetObj.attachmentUrl && (
