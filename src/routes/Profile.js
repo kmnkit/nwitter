@@ -1,9 +1,12 @@
 import { authService } from 'fbase';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { updateProfile } from 'firebase/auth';
+import useTitle from 'components/useTitle';
+
 
 const Profile = ({ userObj, refreshUser }) => {
+    const changeTitle = useTitle();
     const history = useHistory();
     const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
 
@@ -23,8 +26,11 @@ const Profile = ({ userObj, refreshUser }) => {
             await updateProfile(authService.currentUser, { displayName: newDisplayName });
             refreshUser();
         };
-
     };
+
+    useEffect(() => {
+        changeTitle('Profile');
+    }, []);
     return (
         <>
             <form onSubmit={onSubmit}>

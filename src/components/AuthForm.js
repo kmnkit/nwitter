@@ -1,15 +1,17 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@firebase/auth';
 import { authService } from 'fbase';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { updateProfile } from '@firebase/auth';
+import useTitle from 'components/useTitle';
 
 const AuthForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [newAccount, setNewAccount] = useState(true);
     const [error, setError] = useState("");
+    const changeTitle = useTitle();
 
     const onChange = (e) => {
         const {
@@ -41,6 +43,10 @@ const AuthForm = () => {
     };
 
     const toggleAccount = () => setNewAccount(prev => !prev);
+
+    useEffect(() => {
+        changeTitle('Auth');
+    }, []);
 
     return (
         <>
